@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Web.Mvc;
 using System.ComponentModel.DataAnnotations;
+
 
 namespace Frogger_Blogger.Models
 {
@@ -9,7 +11,23 @@ namespace Frogger_Blogger.Models
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
-
+    public class CommentViewModel
+    {
+        [Required]
+        public int Id { get; set; }
+        [Required]
+        [StringLength(50)]
+        public string AuthorId { get; set; }
+        [Required]
+        [AllowHtml]
+        public string Body { get; set; }
+        [Required]
+        [StringLength(100)]
+        [DataType(DataType.EmailAddress)]
+        [EmailAddress]
+        public string Email { get; set; }
+        public virtual ApplicationUser Author { get; set; }
+    }
     public class ExternalLoginListViewModel
     {
         public string ReturnUrl { get; set; }
@@ -61,7 +79,10 @@ namespace Frogger_Blogger.Models
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
     }
+    public class LogOutViewModel
+    {
 
+    }
     public class RegisterViewModel
     {
         [Required]
@@ -77,7 +98,7 @@ namespace Frogger_Blogger.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
 
@@ -96,13 +117,20 @@ namespace Frogger_Blogger.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }
     }
 
     public class ForgotPasswordViewModel
+    {
+        [Required]
+        [EmailAddress]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+    }
+    public class ResendEmailConfirmationViewModel
     {
         [Required]
         [EmailAddress]

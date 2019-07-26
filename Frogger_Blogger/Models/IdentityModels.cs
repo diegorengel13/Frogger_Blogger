@@ -43,6 +43,6 @@ namespace Frogger_Blogger.Models
         }
         public DbSet<BlogPost> BlogPosts { get; set; }
         public DbSet<Comment> Comments { get; set; }
-
+        public object Posts { get; internal set; }
     }
 }
