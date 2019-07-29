@@ -12,6 +12,7 @@ using System.Web.Mvc;
 
 namespace Frogger_Blogger.Controllers
 {
+    [RequireHttps]
     public class HomeController : Controller
     {
         [HttpPost]

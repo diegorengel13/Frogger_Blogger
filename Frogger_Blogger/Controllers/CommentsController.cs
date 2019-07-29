@@ -7,9 +7,11 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Frogger_Blogger.Models;
+using Microsoft.AspNet.Identity;
 
 namespace Frogger_Blogger.Controllers
 {
+    [RequireHttps]
     public class CommentsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -35,7 +37,7 @@ namespace Frogger_Blogger.Controllers
             }
             return View(comment);
         }
-        [HttpPost]
+        //[HttpPost]
         //public ActionResult Comment(CommentViewModel viewModel)
         //{
         //    if (ModelState.IsValid)
@@ -87,31 +89,47 @@ namespace Frogger_Blogger.Controllers
 
 
         // GET: Comments/Create
-        public ActionResult Create()
-        {
-            ViewBag.AuthorId = new SelectList(db.Users, "Id", "FirstName");
-            ViewBag.BlogPostId = new SelectList(db.BlogPosts, "Id", "Title");
-            return View();
-        }
+        //public ActionResult Create()
+        //{
+        //    ViewBag.AuthorId = new SelectList(db.Users, "Id", "FirstName");
+        //    ViewBag.BlogPostId = new SelectList(db.BlogPosts, "Id", "Title");
+        //    return View();
+        //}
 
         // POST: Comments/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,BlogPostId,AuthorId,Body,Created,Updated,UpdateReason")] Comment comment)
+        public ActionResult Create([Bind(Include = "BlogPostId")] Comment comment, [ModelBinder(typeof(AllowHtmlBinder))] string commentBody, string slug)
         {
             if (ModelState.IsValid)
             {
+                
+                comment.Body = commentBody;
+                comment.AuthorId = User.Identity.GetUserId();
+                comment.Created = DateTimeOffset.Now;
                 db.Comments.Add(comment);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                //return RedirectToAction();
+                return RedirectToAction("Details", "BlogPosts", new { slug = slug });
             }
 
             ViewBag.AuthorId = new SelectList(db.Users, "Id", "FirstName", comment.Author);
             ViewBag.BlogPostId = new SelectList(db.BlogPosts, "Id", "Title", comment.BlogPostId);
             return View(comment);
         }
+        //public class AllowHtmlBinder : IModelBinder
+        //{
+        //    public object BindModel(ControllerContext controllerContext,ModelBindingContext bindingContext)
+        //    {
+        //        var request = controllerContext.HttpContext.Request;
+        //        var comment = bindingContext.ModelName;
+        //        return request.Unvalidated[comment];
+        //    }
+        //}
+
+
 
         // GET: Comments/Edit/5
         public ActionResult Edit(int? id)

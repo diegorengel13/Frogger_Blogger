@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace Frogger_Blogger.Models
 {
+
     public class BlogPost
     {
         public int Id { get; set; }
@@ -33,5 +34,14 @@ namespace Frogger_Blogger.Models
 
 
         }
+
     }
+    //public class LandingPage
+    //{
+    //    public BlogPost CarouselPost { get; set; }
+    //    public BlogPost SmallPost { get; set; }
+    //    public BlogPost SidePost { get; set; }
+    //    public BlogPost LargePost { get; set; }
+
+    //}
 }

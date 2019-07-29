@@ -18,10 +18,14 @@
 <!--================ Post Slider Area =================-->
 <section class="post_slider_area">
     <div class="post_slider_inner owl-carousel">
-
+       
 
         @foreach (var item in Model)
         {
+            if (item.MediaUrl != null)
+            {
+                
+             
             <div class="item">
                 <div class="post_s_item">
                     <div class="imgsize">
@@ -30,15 +34,16 @@
                     </div>
                     <div class="post_text">
                         <a class="cat" href="#">Gadgets</a>
-                        <a href="@Url.Action("Details", "BlogPosts", new { Slug = item.Slug})"><h4>@Html.DisplayFor(modelItem => item.Title)</h4></a>
+                        <a href="@Url.Action("Details", "BlogPosts", new { Slug = item.Slug })"><h4>@Html.DisplayFor(modelItem => item.Title)</h4></a>
                         <p>@Html.DisplayFor(modelItem => item.Abstract)</p>
                         <div class="date">
                             <a href="#"><i class="fa fa-calendar" aria-hidden="true"></i>@Html.DisplayFor(modelItem => item.Created)</a>
-                            <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i>  @Html.DisplayFor(modelItem => item.Comments)</a>
+                            <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
+            }
         }
 
     </div>
@@ -51,135 +56,105 @@
         <div class="row">
             <div class="col-lg-8">
                 <div class="blog_left_sidebar">
+                    <div class="blog_img">
+
+                        <img class="img-fluid" src="~/Images/img/home-blog/blog-1.jpg" width="770" height="340" alt="">
+                    </div>
                     @foreach (var item in Model)
                     {
-                        <article class="blog_style1">
-                            <div class="blog_img">
+                        if (item.MediaUrl == null)
+                        {
+                            if (item.Abstract != null)
+                            {
+                                <article class="blog_style1">
 
-                                <img class="img-fluid" src="~/Images/img/home-blog/blog-1.jpg" width="770" height="340" alt="">
-                            </div>
 
-                            <div class="blog_text">
-                                <div class="blog_text_inner">
-                                    <a class="cat" href="#">Gadgets</a>
-                                    <a href="@Url.Action("Details", "BlogPosts",  new { Slug = item.Slug })"><h4>@Html.DisplayFor(modelItem => item.Title)</h4></a>
-                                    <p>@Html.Raw(item.Body)</p>
-                                    <div class="date">
-                                        <a href="#"><i class="fa fa-calendar" aria-hidden="true"></i> March 14, 2018</a>
-                                        <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> 05</a>
+                                    <div class="blog_text">
+                                        <div class="blog_text_inner">
+
+                                            <a href="@Url.Action("Details", "BlogPosts", new { Slug = item.Slug })"><h4>@Html.DisplayFor(modelItem => item.Title)</h4></a>
+                                            <H2><p>@Html.DisplayFor(modelItem => item.Abstract)</p></H2>
+                                            <p>@Html.Raw(item.Body)</p>
+                                            <div class="date">
+                                                <a href="#"><i class="fa fa-calendar" aria-hidden="true"></i> March 14, 2018</a>
+                                                <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> 05</a>
+                                            </div>
+                                        </div>
                                     </div>
+                                </article>
+                            }
+                        }
+                    }
+                    @foreach (var item in Model)
+                    {
+                        if (item.MediaUrl == null)
+                        {
+                            if (item.Abstract == null)
+                            {
+                               
+                                
+                                <div class="row">
+                                    <div class="col-md-6 ">
+                                        <article class="blog_style1 small">
+                                            <div class="blog_img">
+                                                <img class="img-fluid" src="img/home-blog/blog-small-1.jpg" alt="">
+                                            </div>
+                                                <div class="blog_text">
+                                                    <div class="blog_text_inner">
+                                                        <a class="cat" href="#">Gadgets</a>
+                                                        <a href="@Url.Action("Details", "BlogPosts", new { Slug = item.Slug })"><h4>@Html.DisplayFor(modelItem => item.Title)</h4></a>
+                                                        <p>@Html.Raw(item.Body)</p>
+                                                        <div class="date">
+                                                            @Html.DisplayFor(modelItem => item.Created)
+                                                            <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> 05</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        </article>
+                                    </div>
+                           
                                 </div>
-                            </div>
-                        </article>
+                            }
+                        }
                     }
 
-                    <div class="row">
-                        <div class="col-md-6">
-                            <article class="blog_style1 small">
-                                <div class="blog_img">
-                                    <img class="img-fluid" src="img/home-blog/blog-small-1.jpg" alt="">
-                                </div>
-                                <div class="blog_text">
-                                    <div class="blog_text_inner">
-                                        <a class="cat" href="#">Gadgets</a>
-                                        <a href="single-blog.html"><h4>2nd Gen Smoke Co Bomb Alarm integration</h4></a>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
-                                        <div class="date">
-                                            <a href="#"><i class="fa fa-calendar" aria-hidden="true"></i> March 14, 2018</a>
-                                            <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> 05</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </article>
-                        </div>
-                        <div class="col-md-6">
-                            <article class="blog_style1 small">
-                                <div class="blog_img">
-                                    <img class="img-fluid" src="img/home-blog/blog-small-2.jpg" alt="">
-                                </div>
-                                <div class="blog_text">
-                                    <div class="blog_text_inner">
-                                        <a class="cat" href="#">Gadgets</a>
-                                        <a href="single-blog.html"><h4>2nd Gen Smoke Co Bomb Alarm integration</h4></a>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
-                                        <div class="date">
-                                            <a href="#"><i class="fa fa-calendar" aria-hidden="true"></i> March 14, 2018</a>
-                                            <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> 05</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </article>
-                        </div>
-                    </div>
-                    <article class="blog_style1">
-                        <div class="blog_img">
-                            <img class="img-fluid" src="img/home-blog/blog-3.jpg" alt="">
-                        </div>
-                        <div class="blog_text">
-                            <div class="blog_text_inner">
-                                <a class="cat" href="#">Gadgets</a>
-                                <a href="single-blog.html"><h4>Nest Protect: 2nd Gen Smoke CO Alarm</h4></a>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
-                                <div class="date">
-                                    <a href="#"><i class="fa fa-calendar" aria-hidden="true"></i> March 14, 2018</a>
-                                    <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> 05</a>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-                    <article class="blog_style1">
-                        <div class="blog_img">
-                            <img class="img-fluid" src="img/home-blog/blog-4.jpg" alt="">
-                        </div>
-                        <div class="blog_text">
-                            <div class="blog_text_inner">
-                                <a class="cat" href="#">Gadgets</a>
-                                <a href="single-blog.html"><h4>Nest Protect: 2nd Gen Smoke CO Alarm</h4></a>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
-                                <div class="date">
-                                    <a href="#"><i class="fa fa-calendar" aria-hidden="true"></i> March 14, 2018</a>
-                                    <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> 05</a>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
                     @*@*<nav class="blog-pagination justify-content-center d-flex">
-            <ul class="pagination">
-                <li class="page-item">
-                    <a href="#" class="page-link" aria-label="Previous">
-                        <span aria-hidden="true">
-                            <span class="lnr lnr-chevron-left"></span>
-                        </span>
-                    </a>
-                </li>
+                    <ul class="pagination">
+                        <li class="page-item">
+                            <a href="#" class="page-link" aria-label="Previous">
+                                <span aria-hidden="true">
+                                    <span class="lnr lnr-chevron-left"></span>
+                                </span>
+                            </a>
+                        </li>
 
-                <li class="page-item">
-                    <a href="#" class="page-link" aria-label="Next">
-                        <span aria-hidden="true">
-                            <span class="lnr lnr-chevron-right"></span>
-                        </span>
-                    </a>
-                </li>
-            </ul>
-        </nav>*@
-                    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount 
-                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+                        <li class="page-item">
+                            <a href="#" class="page-link" aria-label="Next">
+                                <span aria-hidden="true">
+                                    <span class="lnr lnr-chevron-right"></span>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>*@
+
                 </div>
             </div>
             <div class="col-lg-4">
                 <div class="blog_right_sidebar">
                     <aside class="single_sidebar_widget search_widget">
                         <div class="input-group">
-                        @using (Html.BeginForm("Index", "BlogPosts", FormMethod.Get, htmlAttributes: new { @class = "form" }))
-                        {
-                            <div class="custom-controls-stacked controls-row search-row">
-                                <input id="searchStr" name="searchStr" class="input-block-level" type="text" placeholder="Search Blog" />
-                                <button id="searchStr" name="searchStr" class="btn btn-success" type="submit">
-                                    <i class="icon-search"></i>
-                                </button>
-                            </div>
-                        }
-                            
+                            @using (Html.BeginForm("Index", "BlogPosts", FormMethod.Get, htmlAttributes: new { @class = "form" }))
+                            {
+                                <div class="custom-controls-stacked controls-row search-row">
+                                    <input id="searchStr" name="searchStr" class="input-block-level" type="text" placeholder="Search Blog" />
+                                    <button id="searchStr" name="searchStr" class="btn submit_btn btnLarge" type="submit">Search
+                                        <i class="icon-search"></i>
+                                    </button>
+                                </div>
+
+                            }
+
                         </div><!-- /input-group -->
                         <div class="br"></div>
                     </aside>
@@ -199,7 +174,8 @@
                     <aside class="single_sidebar_widget popular_post_widget">
                         <h3 class="widget_title">Popular Posts</h3>
                         <div class="media post_item">
-                            <img src="img/blog/popular-post/post1.jpg" alt="post">
+                            <img src="~/Images/img/FavSM.ico" alt="post">
+                            
                             <div class="media-body">
                                 <a href="blog-details.html"><h3>Space The Final Frontier</h3></a>
                                 <p>02 Hours ago</p>
@@ -232,54 +208,7 @@
                         <a href="#"><img class="img-fluid" src="img/blog/add.jpg" alt=""></a>
                         <div class="br"></div>
                     </aside>
-                    <aside class="single_sidebar_widget post_category_widget">
-                        <h4 class="widget_title">Post Catgories</h4>
-                        <ul class="list cat-list">
-                            <li>
-                                <a href="#" class="d-flex justify-content-between">
-                                    <p>Technology</p>
-                                    <p>37</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="d-flex justify-content-between">
-                                    <p>Lifestyle</p>
-                                    <p>24</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="d-flex justify-content-between">
-                                    <p>Fashion</p>
-                                    <p>59</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="d-flex justify-content-between">
-                                    <p>Art</p>
-                                    <p>29</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="d-flex justify-content-between">
-                                    <p>Food</p>
-                                    <p>15</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="d-flex justify-content-between">
-                                    <p>Architecture</p>
-                                    <p>09</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="d-flex justify-content-between">
-                                    <p>Adventure</p>
-                                    <p>44</p>
-                                </a>
-                            </li>
-                        </ul>
-                        <div class="br"></div>
-                    </aside>
+                  
                     <aside class="single-sidebar-widget tag_cloud_widget">
                         <h4 class="widget_title">Tag Clouds</h4>
                         <ul class="list">
@@ -299,6 +228,13 @@
                     </aside>
                 </div>
             </div>
+            <br>
+            <hr />
+            <div class="col-md-12 text-center center">
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+                
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+            </div>
         </div>
     </div>
 </section>
@@ -307,7 +243,6 @@
 <!--================ End footer Area  =================-->
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-
 
 
 
@@ -342,7 +277,6 @@
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-            @Html.ActionLink("Details", "Details", new { slug = item.Slug }) |
             @Html.ActionLink("Delete", "Delete", new { id = item.Id })
         </td>
     </tr>
@@ -354,5 +288,9 @@
         width: 400px;
         height: 700px;
         background-color: black;
+    }
+    .btnLarge{
+      
+        cursor :pointer
     }
 </style>

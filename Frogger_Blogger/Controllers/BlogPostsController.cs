@@ -18,6 +18,7 @@ using System.Collections.Generic;
 
 namespace Frogger_Blogger.Controllers
 {
+    [RequireHttps]
     public class BlogPostsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -25,14 +26,22 @@ namespace Frogger_Blogger.Controllers
         // GET: BlogPosts
         public ActionResult Index(int? page, string searchStr)
         {
+            
             ViewBag.Search = searchStr;
             var blogList = IndexSearch(searchStr);
-            int pageSize = 4;
+            int pageSize = 100;
             int pageNumber = page ?? 1;
 
-            //var publishedPosts = db.BlogPosts.Where(b => b.Published).OrderByDescending(b => b.Created).ToPagedList(pageNumber, pageSize);
+            //var LandingPosts = db.BlogPosts.Where(b => b.Published).OrderByDescending(b => b.Created).Take(4).ToList();
+            //var myLandingPage = new LandingPage
+            //{
+            //    CarouselPost = LandingPosts.FirstOrDefault(),
+            //    LargePost = LandingPosts.Skip(1).FirstOrDefault(),
+            //    SmallPost = LandingPosts.Skip(2).FirstOrDefault(),
+            //    SidePost = LandingPosts.Skip(3).FirstOrDefault()
+            //};
 
-
+            //return View(myLandingPage);
 
             return View( blogList.ToPagedList(pageNumber, pageSize));
         }
@@ -183,7 +192,7 @@ namespace Frogger_Blogger.Controllers
 
             return View(blogPost);
         }
-
+        [Authorize(Roles = "Admin")]
         // GET: BlogPosts/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -205,6 +214,7 @@ namespace Frogger_Blogger.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit([Bind(Include = "Id,Title,Abstract,Slug,Body,MediaUrl,Published,Created,Updated")] BlogPost blogPost, HttpPostedFileBase image)
         {
             if (ModelState.IsValid)
@@ -248,7 +258,7 @@ namespace Frogger_Blogger.Controllers
 
             return View(blogPost);
         }
-
+        [Authorize(Roles = "Admin")]
         // GET: BlogPosts/Delete/5
         public ActionResult Delete(int? id)
         {

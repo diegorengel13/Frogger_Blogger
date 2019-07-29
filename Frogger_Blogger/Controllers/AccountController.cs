@@ -418,7 +418,7 @@ namespace Frogger_Blogger.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("Index", "Manage");
+                return RedirectToAction("Index", "BlogPosts");
             }
 
             if (ModelState.IsValid)
@@ -454,7 +454,7 @@ namespace Frogger_Blogger.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "BlogPosts");
         }
 
         //
@@ -511,7 +511,7 @@ namespace Frogger_Blogger.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "BlogPosts");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult

@@ -54,9 +54,9 @@ namespace Frogger_Blogger
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "632630013925645",
+               appSecret: "3d666f42f428ccbbec4e9e7a7863c808");
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{
