@@ -173,6 +173,8 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\CommentRepliesController.cs" />
+    <Compile Include="Models\CommentReply.cs" />
     <Compile Include="Migrations\201907251836527_CreateComments.cs" />
     <Compile Include="Migrations\201907251836527_CreateComments.Designer.cs">
       <DependentUpon>201907251836527_CreateComments.cs</DependentUpon>
@@ -202,11 +204,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\animate.css" />
+    <Content Include="Content\base.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\breadcrumb.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\main.css" />
+    <Content Include="Content\mainWordsmith.css" />
     <Content Include="Content\nice-select.css" />
     <Content Include="Content\normalize.min.css" />
     <Content Include="Content\owl.carousel.min.css" />
@@ -214,6 +218,8 @@
     <Content Include="Content\responsive.css" />
     <Content Include="Content\simpleLightbox.css" />
     <Content Include="Content\style.css" />
+    <Content Include="Content\StyleSheet1.css" />
+    <Content Include="Content\vendor.css" />
     <Content Include="Content\_button.css" />
     <Content Include="Content\_feature.css" />
     <Content Include="Content\_footer.css" />
@@ -340,6 +346,7 @@
     <Content Include="Images\img\Untitled-1.png" />
     <Content Include="Images\img\Untitled-12.jpg" />
     <Content Include="Images\img\VFPNG.png" />
+    <Content Include="Images\img\VirtualF.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="fonts\fontawesome-webfont.eot" />
@@ -405,6 +412,7 @@
     <Content Include="Scripts\theme.js" />
     <Content Include="Scripts\tinymce\jquery.tinymce.min.js" />
     <Content Include="Scripts\tinymce\license.txt" />
+    <Content Include="Scripts\tinymce\plugins.js" />
     <Content Include="Scripts\tinymce\plugins\advlist\plugin.js" />
     <Content Include="Scripts\tinymce\plugins\advlist\plugin.min.js" />
     <Content Include="Scripts\tinymce\plugins\anchor\plugin.js" />
@@ -527,6 +535,7 @@
     <Content Include="Scripts\tinymce\themes\silver\theme.min.js" />
     <Content Include="Scripts\tinymce\tinymce.js" />
     <Content Include="Scripts\tinymce\tinymce.min.js" />
+    <Content Include="Scripts\Wordsmith.js" />
     <Content Include="Scripts\wow.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -583,6 +592,11 @@
     <Content Include="Views\Account\ResendEmailConfirmation.cshtml" />
     <Content Include="Views\Account\ConfirmationSent.cshtml" />
     <Content Include="Views\Account\LogOut.cshtml" />
+    <Content Include="Views\CommentReplies\Create.cshtml" />
+    <Content Include="Views\CommentReplies\Delete.cshtml" />
+    <Content Include="Views\CommentReplies\Details.cshtml" />
+    <Content Include="Views\CommentReplies\Edit.cshtml" />
+    <Content Include="Views\CommentReplies\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

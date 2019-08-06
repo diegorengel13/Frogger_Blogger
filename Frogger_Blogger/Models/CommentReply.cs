@@ -9,7 +9,7 @@ using System.Web.Mvc;
 namespace Frogger_Blogger.Models
 {
 
-    public class Comment
+    public class CommentReply
     {
         public int Id { get; set; }
         //public string Email { get; set; }
@@ -20,14 +20,11 @@ namespace Frogger_Blogger.Models
         private string UpdateReason { get; set; }
 
         //Virtual Navigation section
-        [Required]
+
         public int BlogPostId { get; set; }
         public virtual BlogPost BlogPost { get; set; }
         public virtual ApplicationUser Author { get; set; }
-        public virtual ICollection<CommentReply> CommentReplies { get; set; }
-        public Comment()
-        {
-            CommentReplies = new HashSet<CommentReply>();
-        }
+
+
     }
 }

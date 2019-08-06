@@ -27,11 +27,11 @@ namespace Frogger_Blogger.Models
 
         //Virtual Nav
         public virtual ICollection<Comment> Comments { get; set; }
-
+        public  virtual ICollection<CommentReply> CommentReplies { get; set; }
         public BlogPost()
         {
             Comments = new HashSet<Comment>();
-
+            
 
         }
 

@@ -119,16 +119,8 @@ namespace Frogger_Blogger.Controllers
             ViewBag.BlogPostId = new SelectList(db.BlogPosts, "Id", "Title", comment.BlogPostId);
             return View(comment);
         }
-        //public class AllowHtmlBinder : IModelBinder
-        //{
-        //    public object BindModel(ControllerContext controllerContext,ModelBindingContext bindingContext)
-        //    {
-        //        var request = controllerContext.HttpContext.Request;
-        //        var comment = bindingContext.ModelName;
-        //        return request.Unvalidated[comment];
-        //    }
-        //}
 
+   
 
 
         // GET: Comments/Edit/5

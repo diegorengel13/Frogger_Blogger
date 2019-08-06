@@ -16,9 +16,11 @@ namespace Frogger_Blogger.Models
 
         //virtual nav
         public virtual ICollection<Comment> Comments { get; set; }
+        public virtual ICollection<CommentReply> CommentReplies { get; set; }
         public ApplicationUser()
         {
             Comments = new HashSet <Comment> ();
+            CommentReplies = new HashSet<CommentReply>();
         }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
@@ -43,6 +45,11 @@ namespace Frogger_Blogger.Models
         }
         public DbSet<BlogPost> BlogPosts { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<CommentReply> CommentReplies { get; set; }
         public object Posts { get; internal set; }
+
+      
+
+       
     }
 }

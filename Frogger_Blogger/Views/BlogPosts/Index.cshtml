@@ -10,42 +10,73 @@
 }
 
 
+<link href="~/Content/StyleSheet1.css" rel="stylesheet" />
 
 
 <!--================ Header Menu Area =================-->
 <!--in Layout-->
 <!--================ Header Menu Area =================-->
 <!--================ Post Slider Area =================-->
-<section class="post_slider_area">
-    <div class="post_slider_inner owl-carousel">
-       
+<section class="s-featured">
+    <div class="row">
+        <div class="col-full">
 
-        @foreach (var item in Model)
-        {
-            if (item.MediaUrl != null)
-            {
-                
-             
-            <div class="item">
-                <div class="post_s_item">
-                    <div class="imgsize">
+            <div class="featured-slider featured" data-aos="zoom-in">
 
-                        <img src="@Html.DisplayFor(modelItem => item.MediaUrl)" alt="">
-                    </div>
-                    <div class="post_text">
-                        <a class="cat" href="#">Gadgets</a>
-                        <a href="@Url.Action("Details", "BlogPosts", new { Slug = item.Slug })"><h4>@Html.DisplayFor(modelItem => item.Title)</h4></a>
-                        <p>@Html.DisplayFor(modelItem => item.Abstract)</p>
-                        <div class="date">
-                            <a href="#"><i class="fa fa-calendar" aria-hidden="true"></i>@Html.DisplayFor(modelItem => item.Created)</a>
-                            <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i></a>
-                        </div>
-                    </div>
-                </div>
+
+                @foreach (var item in Model)
+                {
+                    if (item.MediaUrl != null)
+                    {
+
+
+
+                        <div class="featured__slide">
+                            <div class="entry">
+
+                                <div class="entry__background" style="background-image:url('@Url.Content(item.MediaUrl)');"></div>
+
+                                <div class="entry__content">
+                                    <span class="entry__category"><a href="#0"></a></span>
+
+                                    <h1><a href="@Url.Action("Details", "BlogPosts", new { Slug = item.Slug })" title="">@Html.DisplayFor(modelItem => item.Title)</a></h1>
+                                    <p><h4>@Html.DisplayFor(modelItem => item.Abstract)</h4></p>
+                                    <div class="entry__info">
+
+                                        <ul class="entry__meta center">
+                                            <li><a href="#0">@Html.DisplayFor(modelItem => item.Email)</a></li>
+                                            <li>@Html.DisplayFor(modelItem => item.Created)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div> <!-- end entry__content -->
+
+                        </div> <!-- end entry -->
+
+
+                        <!-- end featured__slide -->
+                        @*<div class="item">
+                                <div class="post_s_item">
+                                    <div class="imgsize">
+
+                                        <img src="@Html.DisplayFor(modelItem => item.MediaUrl)" alt="">
+                                    </div>
+                                    <div class="post_text">
+                                        <a class="cat" href="#">Gadgets</a>
+                                        <a href="@Url.Action("Details", "BlogPosts", new { Slug = item.Slug })"><h4>@Html.DisplayFor(modelItem => item.Title)</h4></a>
+                                        <p>@Html.DisplayFor(modelItem => item.Abstract)</p>
+                                        <div class="date">
+                                            <a href="#"><i class="fa fa-calendar" aria-hidden="true"></i>@Html.DisplayFor(modelItem => item.Created)</a>
+                                            <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>*@
+                    }
+                }
+
             </div>
-            }
-        }
-
+        </div>
     </div>
 </section>
 <br />
@@ -76,8 +107,8 @@
                                             <H2><p>@Html.DisplayFor(modelItem => item.Abstract)</p></H2>
                                             <p>@Html.Raw(item.Body)</p>
                                             <div class="date">
-                                                <a href="#"><i class="fa fa-calendar" aria-hidden="true"></i> March 14, 2018</a>
-                                                <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> 05</a>
+                                                <a href="#"><i class="fa fa-calendar" aria-hidden="true"></i> </a>
+                                                <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> </a>
                                             </div>
                                         </div>
                                     </div>
@@ -91,52 +122,52 @@
                         {
                             if (item.Abstract == null)
                             {
-                               
-                                
+
+
                                 <div class="row">
                                     <div class="col-md-6 ">
                                         <article class="blog_style1 small">
                                             <div class="blog_img">
                                                 <img class="img-fluid" src="img/home-blog/blog-small-1.jpg" alt="">
                                             </div>
-                                                <div class="blog_text">
-                                                    <div class="blog_text_inner">
-                                                        <a class="cat" href="#">Gadgets</a>
-                                                        <a href="@Url.Action("Details", "BlogPosts", new { Slug = item.Slug })"><h4>@Html.DisplayFor(modelItem => item.Title)</h4></a>
-                                                        <p>@Html.Raw(item.Body)</p>
-                                                        <div class="date">
-                                                            @Html.DisplayFor(modelItem => item.Created)
-                                                            <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> 05</a>
-                                                        </div>
+                                            <div class="blog_text">
+                                                <div class="blog_text_inner">
+                                                    <a class="cat" href="#">Gadgets</a>
+                                                    <a href="@Url.Action("Details", "BlogPosts", new { Slug = item.Slug })"><h4>@Html.DisplayFor(modelItem => item.Title)</h4></a>
+                                                    <p>@Html.Raw(item.Body)</p>
+                                                    <div class="date">
+                                                        @Html.DisplayFor(modelItem => item.Created)
+                                                        <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> 05</a>
                                                     </div>
                                                 </div>
+                                            </div>
                                         </article>
                                     </div>
-                           
+
                                 </div>
                             }
                         }
                     }
 
                     @*@*<nav class="blog-pagination justify-content-center d-flex">
-                    <ul class="pagination">
-                        <li class="page-item">
-                            <a href="#" class="page-link" aria-label="Previous">
-                                <span aria-hidden="true">
-                                    <span class="lnr lnr-chevron-left"></span>
-                                </span>
-                            </a>
-                        </li>
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <a href="#" class="page-link" aria-label="Previous">
+                                        <span aria-hidden="true">
+                                            <span class="lnr lnr-chevron-left"></span>
+                                        </span>
+                                    </a>
+                                </li>
 
-                        <li class="page-item">
-                            <a href="#" class="page-link" aria-label="Next">
-                                <span aria-hidden="true">
-                                    <span class="lnr lnr-chevron-right"></span>
-                                </span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>*@
+                                <li class="page-item">
+                                    <a href="#" class="page-link" aria-label="Next">
+                                        <span aria-hidden="true">
+                                            <span class="lnr lnr-chevron-right"></span>
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>*@
 
                 </div>
             </div>
@@ -148,7 +179,8 @@
                             {
                                 <div class="custom-controls-stacked controls-row search-row">
                                     <input id="searchStr" name="searchStr" class="input-block-level" type="text" placeholder="Search Blog" />
-                                    <button id="searchStr" name="searchStr" class="btn submit_btn btnLarge" type="submit">Search
+                                    <button id="searchStr" name="searchStr" class="btn submit_btn btnLarge" type="submit">
+                                        Search
                                         <i class="icon-search"></i>
                                     </button>
                                 </div>
@@ -175,7 +207,7 @@
                         <h3 class="widget_title">Popular Posts</h3>
                         <div class="media post_item">
                             <img src="~/Images/img/FavSM.ico" alt="post">
-                            
+
                             <div class="media-body">
                                 <a href="blog-details.html"><h3>Space The Final Frontier</h3></a>
                                 <p>02 Hours ago</p>
@@ -208,7 +240,7 @@
                         <a href="#"><img class="img-fluid" src="img/blog/add.jpg" alt=""></a>
                         <div class="br"></div>
                     </aside>
-                  
+
                     <aside class="single-sidebar-widget tag_cloud_widget">
                         <h4 class="widget_title">Tag Clouds</h4>
                         <ul class="list">
@@ -231,9 +263,9 @@
             <br>
             <hr />
             <div class="col-md-12 text-center center">
-            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-                
-            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+                Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
             </div>
         </div>
     </div>
@@ -244,43 +276,12 @@
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 
-
-
-
-
-@foreach (var item in Model)
-{
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Abstract)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Slug)
-        </td>
-        <td>
-            @Html.Raw(item.Body)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MediaUrl)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Published)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Created)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Updated)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-        </td>
-    </tr>
+@section scripts{
+    <script src="~/Scripts/Wordsmith.js"></script>
 }
+
+
+
 
 
 <style>
@@ -289,8 +290,14 @@
         height: 700px;
         background-color: black;
     }
-    .btnLarge{
-      
-        cursor :pointer
+
+    .btnLarge {
+        cursor: pointer
+    }
+
+    .slick-slide {
+        float: left;
+        min-height: 1px;
+        display: none;
     }
 </style>

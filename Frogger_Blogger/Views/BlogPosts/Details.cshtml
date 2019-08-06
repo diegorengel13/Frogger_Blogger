@@ -28,31 +28,31 @@
 
                 }
             </div>
-        
-             
-                <div class="container">
-                    <div class="banner_content text-center">
-                        @Html.HiddenFor(model => model.Slug)
-                        <div>
-                            
-                    
-                            
-                        </div>
-                        <h2>Blog Post Details</h2>
-                        <div class="page_link">
-                            <a href="/BlogPosts">Home</a>
-                            @if (User.Identity.IsAuthenticated)
-                            {
-                                @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
-                                @Html.ActionLink("Delete", "Delete", new { id = Model.Id })
-                            }
-                                @Html.ActionLink("Back to List", "Index")
-                            </div>
+
+
+            <div class="container">
+                <div class="banner_content text-center">
+                    @Html.HiddenFor(model => model.Slug)
+                    <div>
+
+
+
+                    </div>
+                    <h2>Blog Post Details</h2>
+                    <div class="page_link">
+                        <a href="/BlogPosts">Home</a>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+                            @Html.ActionLink("Delete", "Delete", new { id = Model.Id })
+                        }
+                        @Html.ActionLink("Back to List", "Index")
                     </div>
                 </div>
-                }
-            }
             </div>
+            }
+            }
+        </div>
     </section>
     <!--================End Home Banner Area =================-->
     <!--================Blog Area =================-->
@@ -67,9 +67,7 @@
                         <a href="#"><h4>@Model.Title</h4></a>
                         <div class="user_details">
                             <div class="float-left">
-                                f
-                                <a href="#">Lifestyle</a>
-                                <a href="#">Gadget</a>
+                        
                             </div>
                             <div class="float-right">
                                 <div class="media">
@@ -128,79 +126,83 @@
                         </div>
                     </div>
                     <div class="comments-area">
-                        <h4>05 Comments</h4>
-                        <div class="comment-list">
-                            <div class="single-comment justify-content-between d-flex">
-                                <div class="user justify-content-between d-flex">
-                                    <div class="thumb">
-                                        <img src="img/blog/c1.jpg" alt="">
-                                    </div>
-                                    <div class="desc">
-                                        <h5><a href="#">Emilly Blunt</a></h5>
-                                        <p class="date">December 4, 2017 at 3:12 pm </p>
-                                        <p class="comment">
-                                            Never say goodbye till the end comes!
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="reply-btn">
-                                    <a href="" class="btn-reply text-uppercase">reply</a>@*create modal*@
-                                </div>
-                            </div>
-                        </div>
-                        <div class="comment-list left-padding">
-                            <div class="single-comment justify-content-between d-flex">
-                                <div class="user justify-content-between d-flex">
-                                    <div class="thumb">
-                                        <img src="img/blog/c2.jpg" alt="">
-                                    </div>
-                                    <div class="desc">
-                                        <h5><a href="#">Elsie Cunningham</a></h5>
-                                        <p class="date">December 4, 2017 at 3:12 pm </p>
-                                        <p class="comment">
-                                            Never say goodbye till the end comes!
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="reply-btn">
-                                    <a href="" class="btn-reply text-uppercase">reply</a>
-                                </div>
-                            </div>
-                        </div>
-
-
-                    </div>
-                    @*comments box*@
-                    <div class="comment-form">
-                        <h4>Leave a Reply</h4>
-
-                        @if (User.Identity.IsAuthenticated)
+                        <h4>Comments</h4>
+                        @foreach (var comment in Model.Comments.OrderByDescending(c => c.Created))
                         {
 
-                            using (Html.BeginForm("Create", "Comments", FormMethod.Post))
-                            {
-                                @Html.AntiForgeryToken()
-                                @Html.HiddenFor(model => model.Slug)
-                                @Html.Hidden("BlogPostId", Model.Id)
-
-                                @*<div class="form-group form-inline">
-                                        <div class="form-group col-lg-6 col-md-6 name">
-                                            <input type="text" class="form-control" id="name" placeholder="Enter Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Name'">
+                            <div class="comment-list">
+                                <div class="single-comment justify-content-between d-flex">
+                                    <div class="user justify-content-between d-flex">
+                                        <div class="thumb">
+                                            <img src="img/blog/c1.jpg" alt="">
                                         </div>
-                                    </div>*@
-
-                                <div class="form-group">
-                                    <textarea name="commentBody" class="form-control mb-10" id="CommentBody" placeholder="Add Comment"></textarea>
+                                        <div class="desc">
+                                            <h5><a href="#">@comment.Author.Email</a></h5>
+                                            <p class="date">@comment.Created.ToString("MM dd, yyyy") </p>
+                                            <p class="comment">
+                                                @Html.Raw(comment.Body)
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="reply-btn">
+                                        <button class="btn-reply text-uppercase" data-toggle="modal" data-target="#replybtn">reply</button>@*create modal*@
+                                    </div>
                                 </div>
-                                <button type="submit" value="Comment" class="primary-btn submit_btn">Post Comment</button>
+                            </div>
+                         }
+                        @foreach (var commentReply in Model.CommentReplies.OrderByDescending(c => c.Created))
+                        {
 
 
-                            }
+                                <div class="comment-list left-padding">
+                                    <div class="single-comment justify-content-between d-flex">
+                                        <div class="user justify-content-between d-flex">
+                                            <div class="thumb">
+                                                <img src="img/blog/c2.jpg" alt="">
+                                            </div>
+                                            <div class="desc">
+                                                <h5><a href="#">@commentReply.Author.Email</a></h5>
+                                                <p class="date">@commentReply.Created.ToString("MM dd, yyyy")</p>
+                                                <p class="comment">
+                                                    @Html.Raw(commentReply.Body)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                         }
+                        </div>
+                        @*comments box*@
+                        <div class="comment-form">
+                            <h4>Leave a Reply</h4>
+
+                            @if (User.Identity.IsAuthenticated)
+                            {
+
+                                using (Html.BeginForm("Create", "Comments", FormMethod.Post))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.HiddenFor(model => model.Slug)
+                                    @Html.Hidden("BlogPostId", Model.Id)
+
+                                    @*<div class="form-group form-inline">
+                            <div class="form-group col-lg-6 col-md-6 name">
+                                <input type="text" class="form-control" id="name" placeholder="Enter Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Name'">
+                            </div>
+                        </div>*@
+
+                                    <div class="form-group">
+                                        <textarea name="commentBody" class="form-control mb-10" id="CommentBody" placeholder="Add Comment"></textarea>
+                                    </div>
+                                    <button type="submit" value="Comment" class="primary-btn submit_btn">Post Comment</button>
 
 
+                                }
+                            }
+
+
+                        </div>
                     </div>
-                </div>
                 @*Search bar input*@
                 <div class="col-lg-4">
                     <div class="blog_right_sidebar">
@@ -347,20 +349,69 @@
 
 
     @*displaying the comments associated with this blog post*@
-    @foreach (var comment in Model.Comments.OrderByDescending(c => c.Created))
-    {
-        <div class="row">
-            Written By @comment.Author.Email on @comment.Created.ToString("MM dd, yyyy")
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                @Html.Raw(comment.Body)
+    @*@foreach (var comment in Model.Comments.OrderByDescending(c => c.Created))
+        {
+            <div class="row">
+                Written By @comment.Author.Email on @comment.Created.ToString("MM dd, yyyy")
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    @Html.Raw(comment.Body)
+                </div>
+            </div>
+
+
+        }*@
+    <div id="replybtn" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content ">
+                <div class="modal-dialog modal-dialog-center">
+                    <div class="modal-header text-center">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="col-md-12 modal-title text-center">Leave Comment Reply</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="modal-dialog">
+                            <div class="row">
+                                <div class="col-md-12">
+                                @if (User.Identity.IsAuthenticated)
+                                {
+
+                                    using (Html.BeginForm("Create", "CommentReplies", FormMethod.Post))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        @Html.HiddenFor(model => model.Slug)
+                                        @Html.Hidden("BlogPostId", Model.Id)
+
+                                        @*<div class="form-group form-inline">
+                    <div class="form-group col-lg-6 col-md-6 name">
+                        <input type="text" class="form-control" id="name" placeholder="Enter Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Name'">
+                    </div>
+                </div>*@
+
+                                        <div class="form-group">
+                                            <textarea name="commentReply" class="form-control mb-10" placeholder="Add Comment" rows="5" cols="10"></textarea>
+                                        </div>
+                                        <button type="submit" value="CommentReply" class="primary-btn submit_btn">Post Reply</button>
+
+                                    }
+                                }
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
-       
-
-    }
-
+    </div>;
 </body>
 </html>
 
